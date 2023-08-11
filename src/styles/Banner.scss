@@ -1,0 +1,25 @@
+@import "Color.scss";
+
+#banner {
+  height: 5rem;
+  background-color: $light-blue;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 4rem;
+  font-family: "CartoGothicStd Bold";
+
+  p {
+    margin: 0;
+    font-size: 1.25rem;
+  }
+
+  #mode {
+    display: flex;
+    gap: 1rem;
+    p {
+      font-size: 1rem;
+      font-family: "CartoGothicStd";
+    }
+  }
+}
