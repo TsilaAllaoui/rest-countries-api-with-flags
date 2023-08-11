@@ -63,6 +63,10 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
+    if (region == "") {
+      setCountries(allCountries);
+      return;
+    }
     if (searchFilter == "")
       setCountries(allCountries.filter((country) => country.region == region));
     else
@@ -107,14 +111,18 @@ const Home = () => {
           </form>
         </div>
         <div id="filter">
-          <div id="region-dropdown" onClick={toggleFilter}>
-            <p id="current-region-name">
+          <div id="region-dropdown">
+            <p id="current-region-name" onClick={toggleFilter}>
               {region == "" ? "Filter by Region" : region}
             </p>
-            <RiArrowDropDownLine id="dropdown-icon" />
+            <div onClick={toggleFilter}>
+              <RiArrowDropDownLine id="dropdown-icon" />
+            </div>
             <div
               onClick={() => {
                 setRegion("");
+                setSearchFilter("");
+                inputRef.current!.value = "";
               }}
             >
               <RxCross2 id="reset" />
