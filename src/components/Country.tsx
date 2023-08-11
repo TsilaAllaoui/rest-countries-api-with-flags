@@ -3,7 +3,6 @@ import CountryData from "../models/CountryData";
 import "../styles/Country.scss";
 
 const Country = ({ country }: { country: CountryData }) => {
-  useEffect(() => console.log(country.flag.replace('"', "")), []);
   return (
     <div id="country">
       <div
@@ -12,7 +11,7 @@ const Country = ({ country }: { country: CountryData }) => {
       ></div>
       <div id="infos">
         <p id="name">{country.name}</p>
-        <p>Population: {country.population}</p>
+        <p>Population: {country.population.toLocaleString("en-US")}</p>
         <p>Region: {country.region}</p>
         <p>Capital: {country.capital}</p>
       </div>

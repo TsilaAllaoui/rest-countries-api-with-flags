@@ -1,5 +1,14 @@
 @import "./Color.scss";
 
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 #country {
   max-width: 20rem;
   height: 25rem;
@@ -8,6 +17,8 @@
   border-radius: 0.5rem;
   flex-basis: 33.33%;
   margin: 1rem 1.5rem 2rem 1.5rem;
+  transition: opacity 500ms;
+  animation: fadein 1000ms forwards;
 
   #flag {
     width: 100%;

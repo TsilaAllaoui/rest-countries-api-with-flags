@@ -4,16 +4,19 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import CountryData from "../models/CountryData";
 import Country from "./Country";
+import { RxCross2 } from "react-icons/rx";
 
 const Home = () => {
   const regions = ["Africa", "America", "Asia", "Europe", "Oceania"];
-
   const regionList = useRef<HTMLDivElement>(null);
+  const countriesRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [region, setRegion] = useState("");
+  const [countries, setCountries] = useState<CountryData[]>([]);
+  const [allCountries, setAllCountries] = useState<CountryData[]>([]);
+  const [searchFilter, setSearchFilter] = useState("");
 
-  const [region, setRegion] = useState(regions[0]);
-
-  const toggleFilter = (_e: React.MouseEvent<HTMLDivElement>) => {
-    console.log(regionList.current!.style.transform);
+  const toggleFilter = (_e: React.MouseEvent<HTMLDivElement> | null) => {
     regionList.current!.style.transform =
       regionList.current!.style.transform == "scaleY(0)"
         ? "scaleY(1)"
@@ -25,10 +28,20 @@ const Home = () => {
     region: string
   ) => {
     setRegion(region);
-    console.log(region);
+    toggleFilter(null);
   };
 
-  const [countries, setCountries] = useState<CountryData[]>([]);
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchFilter(e.currentTarget.value);
+  };
+
+  const applySearchFilter = (_e: React.MouseEvent<HTMLDivElement> | null) => {
+    if (searchFilter == "") setCountries(allCountries);
+    else
+      setCountries(
+        allCountries.filter((country) => country.name.includes(searchFilter))
+      );
+  };
 
   useEffect(() => {
     fetch("/data.json")
@@ -44,21 +57,68 @@ const Home = () => {
             flag: country.flag,
           })
         );
+        setAllCountries(datas);
         setCountries(datas);
       });
   }, []);
+
+  useEffect(() => {
+    if (searchFilter == "")
+      setCountries(allCountries.filter((country) => country.region == region));
+    else
+      setCountries(
+        allCountries.filter(
+          (country) =>
+            country.region == region && country.name.includes(searchFilter)
+        )
+      );
+  }, [region]);
+
+  useEffect(() => {
+    countriesRef.current?.childNodes.forEach((node) => {
+      const element = node as HTMLElement;
+      element.style.animation = "";
+      setTimeout(() => {
+        element.style.animation = "fadein 1000ms forwards";
+      }, 500);
+    });
+  }, [countries]);
 
   return (
     <div id="home">
       <div id="options">
         <div id="searchbar">
-          <AiOutlineSearch id="searchicon" />
-          <input type="text" placeholder="Search for a country..." />
+          <div onClick={applySearchFilter}>
+            <AiOutlineSearch id="searchicon" />
+          </div>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              applySearchFilter(null);
+            }}
+          >
+            <input
+              type="text"
+              placeholder="Search for a country..."
+              onChange={handleSearch}
+              ref={inputRef}
+              id="search-input"
+            />
+          </form>
         </div>
         <div id="filter">
           <div id="region-dropdown" onClick={toggleFilter}>
-            <p>Filter by Region</p>
+            <p id="current-region-name">
+              {region == "" ? "Filter by Region" : region}
+            </p>
             <RiArrowDropDownLine id="dropdown-icon" />
+            <div
+              onClick={() => {
+                setRegion("");
+              }}
+            >
+              <RxCross2 id="reset" />
+            </div>
           </div>
           <div
             id="region-list"
@@ -75,11 +135,13 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div id="countries">
+      <div id="countries" ref={countriesRef}>
         {countries.length > 0 &&
-          countries.map((country) => (
-            <Country key={country.name} country={country} />
-          ))}
+          countries.map((country) =>
+            region == "" || country.region == region ? (
+              <Country key={country.name} country={country} />
+            ) : null
+          )}
       </div>
     </div>
   );

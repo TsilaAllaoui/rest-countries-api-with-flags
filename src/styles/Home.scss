@@ -2,6 +2,7 @@
 
 #home {
   width: 100%;
+  min-height: calc(100svh - 5rem);
   background-color: $dark-blue;
   display: flex;
   flex-direction: column;
@@ -31,28 +32,32 @@
         }
       }
 
-      input {
+      form {
         flex-grow: 1;
-        border: none;
-        background-color: transparent;
-        height: 100%;
-        font-family: "CartoGothicStd";
-        font-size: 0.8rem;
-        color: white;
-        padding-left: 1rem;
+        input {
+          width: 100%;
+          border: none;
+          background-color: transparent;
+          height: 100%;
+          font-family: "CartoGothicStd";
+          font-size: 0.8rem;
+          color: white;
+          padding-left: 1rem;
 
-        &::placeholder {
-          color: $grey-white;
-        }
+          &::placeholder {
+            color: $grey-white;
+          }
 
-        &:focus {
-          outline: none;
+          &:focus {
+            outline: none;
+          }
         }
       }
     }
 
     #filter {
-      min-width: 13%;
+      width: 13%;
+      height: 12rem;
       margin-right: 2rem;
       display: flex;
       flex-direction: column;
@@ -81,12 +86,17 @@
           color: $grey-white;
           font-size: 1.5rem;
         }
+
+        #reset {
+          color: $grey-white;
+          font-size: 0.75rem;
+        }
       }
 
       #region-list {
         background-color: $light-blue;
         border-radius: 0.25rem;
-        height: 150%;
+        height: 100%;
         width: 100%;
         transform: scaleY(0);
         transition: transform 250ms;
