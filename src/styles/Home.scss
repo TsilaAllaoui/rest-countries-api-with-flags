@@ -8,10 +8,6 @@
   flex-direction: column;
   transform: translateY(5rem);
 
-  * {
-    z-index: 2;
-  }
-
   #options {
     display: flex;
     justify-content: space-between;
@@ -46,11 +42,11 @@
           height: 100%;
           font-family: "CartoGothicStd";
           font-size: 0.8rem;
-          color: white;
+          color: var(--c, $grey-white);
           padding-left: 1rem;
 
           &::placeholder {
-            color: $grey-white;
+            color: var(--c, $grey-white);
           }
 
           &:focus {
@@ -110,7 +106,7 @@
         position: absolute;
         top: 5.3rem;
         left: 0;
-        z-index: 2;
+        z-index: 5;
 
         ul {
           height: 100%;

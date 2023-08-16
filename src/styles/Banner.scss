@@ -47,6 +47,10 @@
       justify-content: center;
       align-items: center;
 
+      &:hover {
+        cursor: pointer;
+      }
+
       #circle {
         position: absolute;
         width: 25px;

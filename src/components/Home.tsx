@@ -92,10 +92,56 @@ const Home = () => {
   }, [countries]);
 
   useEffect(() => {
+    const color = darkMode ? "rgba(236, 211, 211, 0.696)" : "rgb(33, 46, 55)";
+    const bgColor = darkMode ? "rgb(33, 46, 55)" : "rgba(250, 250, 250)";
+    const bgColorLight = darkMode ? "rgb(43, 55, 67)" : "rgba(250, 250, 250)";
+    const boxShadowColor = darkMode
+      ? "0 0 0.25rem rgb(30, 43, 52)"
+      : "0 0 0.25rem rgb(33, 46, 55)";
+
     const home = document.querySelector("#home") as HTMLElement;
-    home.style.backgroundColor = darkMode
-      ? "rgb(33, 46, 55)"
-      : "rgba(250, 250, 250)";
+    home.style.backgroundColor = bgColor;
+
+    const searchbar = document.querySelector("#searchbar") as HTMLElement;
+    searchbar.style.backgroundColor = darkMode ? "rgb(43, 55, 67)" : "white";
+    searchbar.style.boxShadow = boxShadowColor;
+
+    const searchicon = document.querySelector("#searchicon") as HTMLElement;
+    searchicon.style.color = color;
+
+    const placeholder = document.querySelector("input") as HTMLElement;
+    placeholder.style.setProperty(
+      "--c",
+      darkMode ? "rgba(236, 211, 211, 0.696)" : "rgb(33, 46, 55)"
+    );
+
+    const filter = document.querySelector("#filter") as HTMLElement;
+    filter.style.backgroundColor = bgColor;
+
+    const regionDropdown = document.querySelector(
+      "#region-dropdown"
+    ) as HTMLElement;
+    regionDropdown.style.backgroundColor = bgColorLight;
+    regionDropdown.style.boxShadow = boxShadowColor;
+
+    const currRegionName = document.querySelector(
+      "#current-region-name"
+    ) as HTMLElement;
+    currRegionName.style.color = color;
+
+    const dropDownIcon = document.querySelector(
+      "#dropdown-icon"
+    ) as HTMLElement;
+    dropDownIcon.style.color = color;
+    const resetIcon = document.querySelector("#reset") as HTMLElement;
+    resetIcon.style.color = color;
+
+    const regionList = document.querySelector("#region-list") as HTMLElement;
+    regionList.style.backgroundColor = bgColorLight;
+    regionList.style.boxShadow = boxShadowColor;
+
+    const lis = document.querySelectorAll("li");
+    lis.forEach((li) => (li.style.color = color));
   }, [darkMode]);
 
   return (
