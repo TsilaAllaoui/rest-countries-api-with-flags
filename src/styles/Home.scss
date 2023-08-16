@@ -6,6 +6,11 @@
   background-color: $dark-blue;
   display: flex;
   flex-direction: column;
+  transform: translateY(5rem);
+
+  * {
+    z-index: 2;
+  }
 
   #options {
     display: flex;

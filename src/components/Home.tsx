@@ -1,12 +1,15 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import "../styles/Home.scss";
 import { AiOutlineSearch } from "react-icons/ai";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import CountryData from "../models/CountryData";
 import Country from "./Country";
 import { RxCross2 } from "react-icons/rx";
+import { ModeContext } from "../contexts/mode";
 
 const Home = () => {
+  const darkMode = useContext(ModeContext).darkMode;
+
   const regions = ["Africa", "America", "Asia", "Europe", "Oceania"];
   const regionList = useRef<HTMLDivElement>(null);
   const countriesRef = useRef<HTMLDivElement>(null);
@@ -87,6 +90,13 @@ const Home = () => {
       }, 500);
     });
   }, [countries]);
+
+  useEffect(() => {
+    const home = document.querySelector("#home") as HTMLElement;
+    home.style.backgroundColor = darkMode
+      ? "rgb(33, 46, 55)"
+      : "rgba(250, 250, 250)";
+  }, [darkMode]);
 
   return (
     <div id="home">
