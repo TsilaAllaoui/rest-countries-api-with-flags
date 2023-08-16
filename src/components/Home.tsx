@@ -47,17 +47,18 @@ const Home = () => {
   };
 
   useEffect(() => {
-    fetch("/data.json")
+    fetch("https://restcountries.com/v3.1/all")
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         let datas: CountryData[] = [];
         data.forEach((country: any) =>
           datas.push({
-            name: country.name,
+            name: country.name.common,
             capital: country.capital,
             population: country.population,
             region: country.region,
-            flag: country.flag,
+            flag: country.flags.svg,
           })
         );
         setAllCountries(datas);
@@ -201,9 +202,9 @@ const Home = () => {
       </div>
       <div id="countries" ref={countriesRef}>
         {countries.length > 0 &&
-          countries.map((country) =>
+          countries.map((country, index) =>
             region == "" || country.region == region ? (
-              <Country key={country.name} country={country} />
+              <Country key={index} country={country} />
             ) : null
           )}
       </div>
