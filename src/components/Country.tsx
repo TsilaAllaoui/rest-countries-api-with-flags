@@ -7,9 +7,18 @@ import { ModeContext } from "../contexts/mode";
 import { useContext } from "react";
 
 const Country = () => {
-  const [params] = useSearchParams();
-
   const darkMode = useContext(ModeContext).darkMode;
+
+  const color = darkMode ? "rgba(236, 211, 211, 0.696)" : "rgb(33, 46, 55)";
+  const colorLight = darkMode ? "white" : "rgb(33, 46, 55)";
+  const colorLighter = darkMode ? "white" : "rgb(43, 55, 67)";
+  const bgColor = darkMode ? "rgb(33, 46, 55)" : "rgba(250, 250, 250)";
+  const bgColorLight = darkMode ? "rgb(43, 55, 67)" : "rgba(250, 250, 250)";
+  const boxShadowColor = darkMode
+    ? "0 0 0.25rem rgb(30, 43, 52)"
+    : "0 0 0.25rem rgb(33, 46, 55)";
+
+  const [params] = useSearchParams();
 
   const [country, setCountry] = useState<
     | (CountryData & {
@@ -26,6 +35,54 @@ const Country = () => {
   const navigate = useNavigate();
 
   const [borders, setBorders] = useState<string[]>([]);
+
+  const updateTheme = () => {
+    const country = document.querySelector("#country") as HTMLElement;
+    country.style.backgroundColor = bgColor;
+
+    const back = document.querySelector("#back") as HTMLElement;
+    back.style.backgroundColor = bgColorLight;
+    back.style.color = colorLight;
+
+    const flag = document.querySelector("#flag") as HTMLElement;
+    flag.style.boxShadow = boxShadowColor;
+
+    const name = document.querySelector("#name") as HTMLElement;
+    name.style.color = colorLight;
+
+    const ps = document.querySelectorAll("#left p, #right p");
+    ps.forEach((_p) => {
+      const p = _p as HTMLElement;
+      p.style.color = color;
+    });
+
+    const spans = document.querySelectorAll("#left span, #right span");
+    spans.forEach((_span) => {
+      const span = _span as HTMLElement;
+      span.style.color = colorLighter;
+      span.style.fontWeight = darkMode ? "500" : "900";
+    });
+
+    const borderspans = document.querySelector("#borders span") as HTMLElement;
+    borderspans.style.color = colorLighter;
+    borderspans.style.fontWeight = darkMode ? "500" : "900";
+
+    const bordersps = document.querySelectorAll("#borders p");
+    bordersps.forEach((_p) => {
+      const p = _p as HTMLElement;
+      p.style.color = colorLight;
+      p.style.backgroundColor = bgColorLight;
+      p.style.fontWeight = darkMode ? "500" : "900";
+      p.style.boxShadow = boxShadowColor;
+    });
+
+    const borders = document.querySelectorAll("#borders-countries p");
+    borders.forEach((_border) => {
+      const border = _border as HTMLElement;
+      border.style.color = color;
+      border.style.backgroundColor = bgColor;
+    });
+  };
 
   useEffect(() => {
     const app = document.querySelector("#app") as HTMLElement;
@@ -97,6 +154,7 @@ const Country = () => {
           });
         });
       });
+    updateTheme();
 
     return () => {
       const app = document.querySelector("#app") as HTMLElement;
@@ -105,59 +163,7 @@ const Country = () => {
   }, []);
 
   useEffect(() => {
-    const color = darkMode ? "rgba(236, 211, 211, 0.696)" : "rgb(33, 46, 55)";
-    const colorLight = darkMode ? "white" : "rgb(33, 46, 55)";
-    const colorLighter = darkMode ? "white" : "rgb(43, 55, 67)";
-    const bgColor = darkMode ? "rgb(33, 46, 55)" : "rgba(250, 250, 250)";
-    const bgColorLight = darkMode ? "rgb(43, 55, 67)" : "rgba(250, 250, 250)";
-    const boxShadowColor = darkMode
-      ? "0 0 0.25rem rgb(30, 43, 52)"
-      : "0 0 0.25rem rgb(33, 46, 55)";
-
-    const country = document.querySelector("#country") as HTMLElement;
-    country.style.backgroundColor = bgColor;
-
-    const back = document.querySelector("#back") as HTMLElement;
-    back.style.backgroundColor = bgColorLight;
-    back.style.color = colorLight;
-
-    const flag = document.querySelector("#flag") as HTMLElement;
-    flag.style.boxShadow = boxShadowColor;
-
-    const name = document.querySelector("#name") as HTMLElement;
-    name.style.color = colorLight;
-
-    const ps = document.querySelectorAll("#left p, #right p");
-    ps.forEach((_p) => {
-      const p = _p as HTMLElement;
-      p.style.color = color;
-    });
-
-    const spans = document.querySelectorAll("#left span, #right span");
-    spans.forEach((_span) => {
-      const span = _span as HTMLElement;
-      span.style.color = colorLighter;
-      span.style.fontWeight = darkMode ? "500" : "900";
-    });
-
-    const borderspans = document.querySelector("#borders span") as HTMLElement;
-    borderspans.style.color = colorLighter;
-    borderspans.style.fontWeight = darkMode ? "500" : "900";
-
-    const bordersps = document.querySelectorAll("#borders p");
-    bordersps.forEach((_p) => {
-      const p = _p as HTMLElement;
-      p.style.color = colorLight;
-      p.style.backgroundColor = bgColorLight;
-      p.style.fontWeight = darkMode ? "500" : "900";
-      p.style.boxShadow = boxShadowColor;
-    });
-
-    const borders = document.querySelectorAll("#borders-countries p");
-    borders.forEach((_border) => {
-      const border = _border as HTMLElement;
-      border.style.color = color;
-    });
+    updateTheme();
   }, [darkMode]);
 
   return (
@@ -231,7 +237,18 @@ const Country = () => {
             <span>Border Countries: </span>
             <div id="borders-countries">
               {borders.length > 0 ? (
-                borders.map((border, index) => <p key={index}>{border}</p>)
+                borders.map((border, index) => (
+                  <p
+                    style={{
+                      backgroundColor: bgColorLight,
+                      color: color,
+                      boxShadow: boxShadowColor,
+                    }}
+                    key={index}
+                  >
+                    {border}
+                  </p>
+                ))
               ) : (
                 <span>N/A</span>
               )}
