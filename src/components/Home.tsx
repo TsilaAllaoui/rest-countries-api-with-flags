@@ -3,11 +3,9 @@ import "../styles/Home.scss";
 import { AiOutlineSearch } from "react-icons/ai";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import CountryData from "../models/CountryData";
-import Country from "./CountryItem";
 import { RxCross2 } from "react-icons/rx";
 import { ModeContext } from "../contexts/mode";
 import CountryItem from "./CountryItem";
-import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const darkMode = useContext(ModeContext).darkMode;
