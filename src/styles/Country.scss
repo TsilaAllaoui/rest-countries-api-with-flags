@@ -1,54 +1,136 @@
 @import "./Color.scss";
 
-@keyframes fadein {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
 #country {
-  max-width: 20rem;
-  height: 25rem;
-  background-color: $light-blue;
   color: white;
-  border-radius: 0.5rem;
-  flex-basis: 33.33%;
-  margin: 1rem 1.5rem 2rem 1.5rem;
-  transition: opacity 500ms;
-  animation: fadein 1000ms forwards;
+  display: flex;
+  flex-direction: column;
+  min-height: 75svh;
+  width: 100%;
+  overflow: hidden;
+  background-color: $dark-blue;
+  padding: 4rem;
+  transform: translateY(5rem);
 
-  #flag {
-    width: 100%;
-    height: 50%;
-    background-size: cover;
-    background-position: center;
-    border-radius: 0.5rem 0.5rem 0 0;
+  #back {
+    width: 8rem;
+    height: 3rem;
+    background-color: $light-blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 0.5rem $light-blue;
+    cursor: pointer;
+    user-select: none;
   }
 
-  #infos {
+  #country-infos {
+    width: 100%;
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: space-evenly;
-    height: 50%;
-    overflow-wrap: break-word;
+    justify-content: space-between;
 
-    * {
-      margin: auto 2.5rem;
+    #flag {
+      margin: 4rem 4rem 0 0;
+      width: 40%;
+      height: 50vh;
+      background-size: cover;
+      background-repeat: no-repeat;
+      box-shadow: 0 0 0.5rem $light-blue;
     }
 
-    #name {
-      font-size: 1.5rem;
-      color: white;
-    }
+    #infos {
+      display: flex;
+      width: 65%;
+      height: 100%;
+      align-items: center;
+      flex-direction: column;
+      align-items: flex-start;
 
-    p {
-      margin-top: 0;
-      margin-bottom: 0;
-      color: $grey-white;
+      #name {
+        font-family: "CartoGothicStd Bold";
+        font-size: 2.5rem;
+        color: white;
+      }
+
+      #borders {
+        display: flex;
+        align-items: center;
+        width: 90%;
+
+        span {
+          color: white;
+          padding: 0;
+          margin-right: 1rem;
+        }
+
+        #borders-countries {
+          width: 75%;
+          display: flex;
+          flex-wrap: wrap;
+
+          span {
+            color: grey;
+          }
+
+          p {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: grey;
+            margin: 0.25rem;
+            padding: 0.25rem 0.5rem;
+            background-color: $light-blue;
+            font-size: 0.85rem;
+            height: 1.5rem;
+            border-radius: 0.25rem;
+            box-shadow: 0 0 0.5rem $dark-blue;
+          }
+        }
+      }
+
+      #more-infos {
+        display: flex;
+        gap: 4rem;
+
+        #left {
+          height: 100%;
+
+          p {
+            color: $grey-white;
+            font-size: 0.85rem;
+          }
+
+          span {
+            color: rgba(255, 255, 255, 0.874);
+            font-size: 1rem;
+          }
+        }
+
+        #right {
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+
+          p {
+            color: $grey-white;
+            font-size: 0.85rem;
+          }
+
+          span {
+            color: rgba(255, 255, 255, 0.874);
+            font-size: 1rem;
+          }
+
+          #currencies,
+          #languages {
+            display: flex;
+            gap: 0.25rem;
+            align-items: center;
+          }
+        }
+      }
     }
   }
 }

@@ -1,0 +1,54 @@
+@import "./Color.scss";
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+#country-item {
+  max-width: 20rem;
+  height: 25rem;
+  background-color: $light-blue;
+  color: white;
+  border-radius: 0.5rem;
+  flex-basis: 33.33%;
+  margin: 1rem 1.5rem 2rem 1.5rem;
+  transition: opacity 500ms;
+  animation: fadein 1000ms forwards;
+
+  #flag {
+    width: 100%;
+    height: 50%;
+    background-size: cover;
+    background-position: center;
+    border-radius: 0.5rem 0.5rem 0 0;
+  }
+
+  #infos {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    height: 50%;
+    overflow-wrap: break-word;
+
+    * {
+      margin: auto 2.5rem;
+    }
+
+    #name {
+      font-size: 1.5rem;
+      color: white;
+    }
+
+    p {
+      margin-top: 0;
+      margin-bottom: 0;
+      color: $grey-white;
+    }
+  }
+}

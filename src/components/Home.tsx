@@ -3,9 +3,11 @@ import "../styles/Home.scss";
 import { AiOutlineSearch } from "react-icons/ai";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import CountryData from "../models/CountryData";
-import Country from "./Country";
+import Country from "./CountryItem";
 import { RxCross2 } from "react-icons/rx";
 import { ModeContext } from "../contexts/mode";
+import CountryItem from "./CountryItem";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const darkMode = useContext(ModeContext).darkMode;
@@ -50,7 +52,6 @@ const Home = () => {
     fetch("https://restcountries.com/v3.1/all")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         let datas: CountryData[] = [];
         data.forEach((country: any) =>
           datas.push({
@@ -59,6 +60,7 @@ const Home = () => {
             population: country.population,
             region: country.region,
             flag: country.flags.svg,
+            cca3: country.cca3,
           })
         );
         setAllCountries(datas);
@@ -204,7 +206,7 @@ const Home = () => {
         {countries.length > 0 &&
           countries.map((country, index) =>
             region == "" || country.region == region ? (
-              <Country key={index} country={country} />
+              <CountryItem key={index} country={country} />
             ) : null
           )}
       </div>
