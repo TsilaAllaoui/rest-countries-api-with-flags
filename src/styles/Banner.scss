@@ -1,5 +1,24 @@
 @import "Color.scss";
 
+@keyframes toggle {
+  0% {
+    font-size: 1rem;
+    transform: translateX(0);
+  }
+  33% {
+    font-size: 0rem;
+    transform: translateX(-0.5rem);
+  }
+  66% {
+    font-size: 0.25rem;
+    transform: translateX(-0.5rem);
+  }
+  100% {
+    font-size: 1rem;
+    transform: translateX(0);
+  }
+}
+
 #banner {
   height: 5rem;
   background-color: $light-blue;

@@ -8,6 +8,11 @@ const Banner = () => {
 
   const toggleDarkMode = (_e: React.MouseEvent<HTMLDivElement>) => {
     setDarkMode(!darkMode);
+    const icon = document.querySelector("#mode-icon") as HTMLElement;
+    icon.style.animation = "toggle 750ms linear both";
+    setTimeout(() => {
+      icon.style.animation = "";
+    }, 750);
   };
 
   useEffect(() => {
