@@ -35,6 +35,7 @@
     justify-content: space-evenly;
     height: 50%;
     overflow-wrap: break-word;
+    border-radius: 0 0 0.5rem 0.5rem;
 
     * {
       margin: auto 2.5rem;
@@ -49,6 +50,18 @@
       margin-top: 0;
       margin-bottom: 0;
       color: $grey-white;
+    }
+  }
+}
+
+@media (max-width: 416px) {
+  #country-item {
+    width: 90%;
+    flex-basis: unset;
+    height: 20rem;
+
+    #infos {
+      padding: 1.5rem 0;
     }
   }
 }

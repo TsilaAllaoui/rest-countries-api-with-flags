@@ -13,12 +13,7 @@ const App = () => {
     <ModeContext.Provider
       value={{ darkMode: darkMode, setDarkMode: setDarkMode }}
     >
-      <div
-        id="app"
-        onScroll={() => {
-          console.log("scroll");
-        }}
-      >
+      <div id="app">
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route path="/" element={<Home />} />

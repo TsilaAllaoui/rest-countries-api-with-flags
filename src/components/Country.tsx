@@ -44,9 +44,6 @@ const Country = () => {
     back.style.backgroundColor = bgColorLight;
     back.style.color = colorLight;
 
-    const flag = document.querySelector("#flag") as HTMLElement;
-    flag.style.boxShadow = boxShadowColor;
-
     const name = document.querySelector("#name") as HTMLElement;
     name.style.color = colorLight;
 
@@ -93,7 +90,6 @@ const Country = () => {
     )
       .then((res) => res.json())
       .then((datas: any) => {
-        console.log(datas);
         const data = datas[0];
         const currencies: string[] = [];
         for (let prop in data.currencies) {
@@ -120,7 +116,6 @@ const Country = () => {
         const f = async () => {
           const _borders: string[] = [];
           for (let border in data.borders) {
-            console.log(border);
             try {
               const res = await fetch(
                 `https://restcountries.com/v3.1/alpha/${data.borders[
@@ -152,8 +147,8 @@ const Country = () => {
             borderCountries: borders,
           });
         });
+        updateTheme();
       });
-    updateTheme();
 
     return () => {
       const app = document.querySelector("#app") as HTMLElement;
@@ -209,7 +204,7 @@ const Country = () => {
                   <span>Currencies:</span>
                 </p>
                 {country?.currencies.map((currency, index) => (
-                  <p key={index}>
+                  <p key={index} style={{ color: color }}>
                     {currency +
                       (index == country?.currencies.length - 1 && index == 0
                         ? ""
@@ -222,7 +217,7 @@ const Country = () => {
                   <span>Languages:</span>
                 </p>
                 {country?.languages.map((language, index) => (
-                  <p key={index}>
+                  <p key={index} style={{ color: color }}>
                     {language +
                       (index == country?.languages.length - 1 || index == 0
                         ? ""
@@ -249,7 +244,7 @@ const Country = () => {
                   </p>
                 ))
               ) : (
-                <span>N/A</span>
+                <span style={{ color: color }}>N/A</span>
               )}
             </div>
           </div>

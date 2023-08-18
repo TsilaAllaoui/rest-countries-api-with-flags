@@ -60,6 +60,7 @@ const CountryItem = ({ country }: { country: CountryData }) => {
         id="infos"
         style={{
           backgroundColor: bgColor,
+          boxShadow: boxShadowColor,
         }}
       >
         <p
