@@ -42,7 +42,9 @@ const Home = () => {
     if (searchFilter == "") setCountries(allCountries);
     else
       setCountries(
-        allCountries.filter((country) => country.name.includes(searchFilter))
+        allCountries.filter((country) =>
+          country.name.toLowerCase().includes(searchFilter.toLowerCase())
+        )
       );
   };
 
