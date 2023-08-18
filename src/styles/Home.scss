@@ -140,3 +140,9 @@
     align-items: center;
   }
 }
+
+@media (max-width: 416px) {
+  #home {
+    min-height: unset;
+  }
+}

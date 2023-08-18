@@ -62,3 +62,31 @@
     }
   }
 }
+
+@media (max-width: 416px) {
+  #banner {
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 5rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    p {
+      padding: 0;
+      font-size: 0.75rem;
+    }
+
+    #mode {
+      padding: 0;
+      gap: 0.5rem;
+
+      #mode-text {
+        padding: 0;
+        font-size: 0.75rem;
+      }
+    }
+  }
+}

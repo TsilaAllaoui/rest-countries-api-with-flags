@@ -15,7 +15,7 @@ const Country = () => {
   const bgColor = darkMode ? "rgb(33, 46, 55)" : "rgba(250, 250, 250)";
   const bgColorLight = darkMode ? "rgb(43, 55, 67)" : "rgba(250, 250, 250)";
   const boxShadowColor = darkMode
-    ? "0 0 0.25rem rgb(30, 43, 52)"
+    ? "0 0 0.25rem rgb(43, 55, 67)"
     : "0 0 0.25rem rgb(33, 46, 55)";
 
   const [params] = useSearchParams();
@@ -80,13 +80,12 @@ const Country = () => {
     borders.forEach((_border) => {
       const border = _border as HTMLElement;
       border.style.color = color;
-      border.style.backgroundColor = bgColor;
+      border.style.backgroundColor = bgColorLight;
+      border.style.boxShadow = boxShadowColor;
     });
   };
 
   useEffect(() => {
-    const app = document.querySelector("#app") as HTMLElement;
-    app.style.overflowY = "hidden";
     fetch(
       `https://restcountries.com/v3.1/alpha/${params
         .get("name")
